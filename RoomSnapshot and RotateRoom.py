@@ -64,6 +64,9 @@ class RoomSnapshot:
             ypoints.append(y)
         return ypoints
 
+    def rotateRoom(appendAngle):
+        return appendAngle
+
 
 
 def showOnConsoleWithRotation(appendAngle):

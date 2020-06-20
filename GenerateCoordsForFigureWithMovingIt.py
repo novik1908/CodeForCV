@@ -55,9 +55,21 @@ def getAsXYspecial(dist, angle):
         y = 0
     return x, y
 
+def moveObject(dx, dy, doc):
+    docname = open(doc, "r")
+    tcompfig = []
+    for line in docname:
+        vectorArray = line.split(' ')
+        dist = float(vectorArray[0])
+        angle = float(vectorArray[1])
+        t = toRadial(getAsXYspecial(dist, angle)[0] + dx, getAsXYspecial(dist, angle)[1] + dy)
+        tcompfig.append(t)
+        with open('movedObject.txt', 'w', encoding='utf-8') as f:
+            for i in range(len(tcompfig)):
+                print('{} {}'.format(tcompfig[i].dist, tcompfig[i].angle), file=f)
 
 vectorsFig = []
-with open('testFig.txt', 'w', encoding = 'utf-8') as f:
+with open('test3.txt', 'w', encoding = 'utf-8') as f:
     for angle in range(0, 90, 1):
         angle = angle + random.uniform(-0.8, 0.8)
         dist = 25 + random.uniform(-0.8, 0.8)
@@ -66,7 +78,7 @@ with open('testFig.txt', 'w', encoding = 'utf-8') as f:
     for i in range(len(vectorsFig)):
         print('{} {}'.format(vectorsFig[i].dist, vectorsFig[i].angle), file = f)
 
-docname = open('testFig.txt', "r")
+docname = open('test3.txt', "r")
 tcompfig = []
 for line in docname:
     vectorArray = line.split(' ')
@@ -81,7 +93,7 @@ with open('test2.txt', 'w', encoding = 'utf-8') as f:
 
 
 vectors = []
-with open('test.txt', 'w', encoding = 'utf-8') as f:
+with open('test1.txt', 'w', encoding = 'utf-8') as f:
     for angle in range(0, 45, 1):
         angle = angle + random.uniform(-0.8, 0.8)
         dist = 50 / math.cos(math.radians(angle)) + random.uniform(-0.8, 0.8)
@@ -126,17 +138,5 @@ with open('test.txt', 'w', encoding = 'utf-8') as f:
         print('{} {}'.format(vectors[i].dist, vectors[i].angle), file = f)
 
 
-def moveObject(dx, dy, doc):
-    docname = open(doc, "r")
-    tcompfig = []
-    for line in docname:
-        vectorArray = line.split(' ')
-        dist = float(vectorArray[0])
-        angle = float(vectorArray[1])
-        t = toRadial(getAsXYspecial(dist, angle)[0] + dx, getAsXYspecial(dist, angle)[1] + dy)
-        tcompfig.append(t)
-        with open('movedObject.txt', 'w', encoding='utf-8') as f:
-            for i in range(len(tcompfig)):
-                print('{} {}'.format(tcompfig[i].dist, tcompfig[i].angle), file=f)
 
-moveObject(40, -60, 'test.txt')
+moveObject(40, -60, 'test1.txt')

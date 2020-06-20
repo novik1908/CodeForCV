@@ -24,8 +24,8 @@ class RadialPoint:
             y = 0
         return x, y
 
-def showOnConsle(self):
-    with open('05.csv', newline='') as csvfile:
+def showOnConsle():
+    with open('01.csv', newline='') as csvfile:
         spamreader = csv.reader(csvfile, delimiter=';', quotechar='|')
         for row in spamreader:
             dist = float(row[0])
@@ -33,10 +33,10 @@ def showOnConsle(self):
             v = RadialPoint(dist, angle)
             print('dist = {} angle = {} coords = {}'.format(dist, angle, v.getAsXY()))
 
-def showAsImage(self):
+def showAsImage():
     x = []
     y = []
-    with open('05.csv', newline='') as csvfile:
+    with open('01.csv', newline='') as csvfile:
         spamreader = csv.reader(csvfile, delimiter=';', quotechar='|')
         for row in spamreader:
             dist = float(row[0])
@@ -49,9 +49,9 @@ def showAsImage(self):
 
 def selectHowToShowInfo(typeOfDispl):
     if typeOfDispl == "console":
-        return showOnConsle(path)
+        return showOnConsle()
     if typeOfDispl == "image":
-        return showAsImage(path)
+        return showAsImage()
 
 
 display = input("How to display info (console, image)? ")
