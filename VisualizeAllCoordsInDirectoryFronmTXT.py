@@ -1,26 +1,7 @@
-import math
-import os
-import fnmatch
+from RadialPoint import RadialPoint
 import matplotlib.pyplot as plt
-
-class RadialPoint:
-    def __init__(self, dist, angle):
-        self.dist = dist
-        self.angle = angle
-
-    def getAsXY(self, dist, angle):
-        if dist < 0:
-            dist = -dist
-            angle = 180 + angle
-            x = dist * math.sin(math.radians(90 - angle))
-            y = dist * math.sin(math.radians(angle))
-        elif dist > 0:
-            x = dist * math.sin(math.radians(90 - angle))
-            y = dist * math.sin(math.radians(angle))
-        elif dist == 0:
-            x = 0
-            y = 0
-        return x, y
+import fnmatch
+import os
 
 
 def showOnConsle(path):
@@ -32,7 +13,7 @@ def showOnConsle(path):
             dist = float(vectorArray[0])
             angle = float(vectorArray[1])
             v = RadialPoint(dist, angle)
-            print('dist = {} angle = {} coords = {}'.format(dist, angle, v.getAsXY(dist, angle)))
+            print(f"dist = {dist} angle = {angle} coords = {v.getAsXY()}")
 
 def showAsImage(path):
     alltxtfiles = fnmatch.filter(os.scandir(path), "*.txt")
@@ -43,7 +24,7 @@ def showAsImage(path):
             dist = float(vectorArray[0])
             angle = float(vectorArray[1])
             v = RadialPoint(dist, angle)
-            plt.scatter(v.getAsXY(dist, angle)[0], v.getAsXY(dist, angle)[1], c = 'black', s = 1)
+            plt.scatter(v.getAsXY()[0], v.getAsXY()[1], c='black', s=1)
     plt.show()
 
 def selectHowToShowInfo(typeOfDispl):

@@ -1,33 +1,13 @@
-import math
+from RadialPoint import RadialPoint
 import matplotlib.pyplot as plt
+import math
 import csv
 
 
-class RadialPoint:
-    def __init__(self, dist, angle):
-        self.dist = dist
-        self.angle = angle
-
-    def getAsXY(self):
-        dist = self.dist
-        angle = self.angle
-        if dist < 0:
-            dist = -dist
-            angle = 180 + angle
-            x = dist * math.sin(math.radians(90 - angle))
-            y = dist * math.sin(math.radians(angle))
-        elif dist > 0:
-            x = dist * math.sin(math.radians(90 - angle))
-            y = dist * math.sin(math.radians(angle))
-        elif dist == 0:
-            x = 0
-            y = 0
-        return x, y
-
 def showOnConsle():
-    with open('01.csv', newline='') as csvfile:
-        spamreader = csv.reader(csvfile, delimiter=';', quotechar='|')
-        for row in spamreader:
+    with open('data/01.csv', newline='') as csvfile:
+        csvreader = csv.reader(csvfile, delimiter=';', quotechar='|')
+        for row in csvreader:
             dist = float(row[0])
             angle = float(row[1])
             v = RadialPoint(dist, angle)
@@ -37,8 +17,8 @@ def showAsImage():
     x = []
     y = []
     with open('01.csv', newline='') as csvfile:
-        spamreader = csv.reader(csvfile, delimiter=';', quotechar='|')
-        for row in spamreader:
+        csvreader = csv.reader(csvfile, delimiter=';', quotechar='|')
+        for row in csvreader:
             dist = float(row[0])
             angle = float(row[1])
             v = RadialPoint(angle, dist)
